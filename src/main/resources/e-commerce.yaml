@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Swagger e-commerce api - OpenAPI 3.0
+  description: This is a sample of a e-commerce api
+  contact:
+    email: fernandomanuelp90@gmail.com
+  version: 1.0.11
+servers:
+  - url: https://e-commerce/api
+tags:
+  - name: price
+    description: Everything about pthe rice of products
+paths:
+  /price:
+    get:
+      tags:
+        - price
+      summary: get prices of a product
+      description: get price by rate application date, product id and brand id,
+      operationId: getPrice
+      parameters:
+        - name: productId
+          in: query
+          description: product identifier
+          required: true
+          schema:
+            type: integer
+        - name: brandId
+          in: query
+          description: brand identifier
+          required: true
+          schema:
+            type: integer
+        - name: rateStartDate
+          in: query
+          description: start of rate
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: client error
+        '404':
+          description: Price not found
+        '405':
+          description: Validation exception
+components:
+  schemas:
+      PriceResponse:
+        type: object
+        properties:
+          rateStartDate:
+            type: string
+            example: 2099-12-12T00:00.000Z
+          brandId:
+            type: integer
+            format: int64
+            example: 3
+          productId:
+            type: integer
+            format: int64
+            example: 10
+          rateId:
+            type: integer
+            format: int64
+            example: 3
+          price:
+            type: number
+            minimum: 0
+            example: 3.5
+          currency:
+            type: string
+            example: EUR
