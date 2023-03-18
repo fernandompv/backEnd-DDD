@@ -1,4 +1,4 @@
-package com.demo.redegal.redegal;
+package com.demo.redegal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
