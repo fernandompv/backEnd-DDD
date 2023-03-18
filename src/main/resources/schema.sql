@@ -1,8 +1,8 @@
 CREATE TABLE prices
 ( id INT AUTO_INCREMENT PRIMARY KEY,
 brand_id INT NOT NULL,
-start_date DATE NOT NULL,
-end_date DATE NOT NULL,
+start_date TIMESTAMP  NOT NULL,
+end_date TIMESTAMP  NOT NULL,
 price_list INT NOT NULL,
 product_id INT NOT NULL,
 priority BIT NOT NULL,

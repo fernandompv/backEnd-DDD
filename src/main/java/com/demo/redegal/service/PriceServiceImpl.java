@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
+import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
+import java.util.Objects;
 
 @Service
 public class PriceServiceImpl  {
@@ -26,8 +26,6 @@ public class PriceServiceImpl  {
 
     @Autowired
     private PriceResponseMapper priceResponseMapper;
-
-    private String ISO8601FORMAT = "yyyy-MM-dd'T'HH:mm'Z'";
 
     @SneakyThrows
     public PriceResponse getPrice(Integer productId, Integer brandId, String rateStartDate){
@@ -43,11 +41,21 @@ public class PriceServiceImpl  {
             priceResponses.add(priceResponse);
         }
 
-        return priceResponses
+        return returnPriceWithPriority(priceResponses);
+    }
+
+    private PriceResponse returnPriceWithPriority(List<PriceResponse> priceResponses) {
+        PriceResponse priceResponse =  priceResponses
                 .stream()
                 .filter(PriceResponse::getPriority)
-                .findAny()
+                .findFirst()
                 .orElse(null);
+
+        if(Objects.isNull(priceResponse) && !priceResponses.isEmpty()){
+            priceResponse = priceResponses.get(0);
+        }
+
+        return priceResponse;
     }
 
     private PreparedStatement createStatementByQuery(String query, Integer productId,
@@ -55,15 +63,14 @@ public class PriceServiceImpl  {
         PreparedStatement statement = database.getConnection().prepareStatement(query);
         statement.setInt(1,productId);
         statement.setInt(2,brandId);
-        statement.setDate(3, parseRequestStringToDate(rateStartDate));
+        statement.setTimestamp(3,parseRequestStringToDate(rateStartDate));
         return statement;
     }
 
-    private java.sql.Date parseRequestStringToDate(String rateStartDate) throws ParseException {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat(ISO8601FORMAT); // Quoted "Z" to indicate UTC, no timezone offset
-        df.setTimeZone(tz);
-        return new java.sql.Date(df.parse(rateStartDate).getTime());
+    private Timestamp parseRequestStringToDate(String rateStartDate) throws ParseException {
+        DateTimeFormatter isoFormat = DateTimeFormatter.ISO_DATE_TIME;
+        LocalDateTime dateTime = LocalDateTime.parse(rateStartDate, isoFormat);
+        return Timestamp.valueOf(dateTime);
     }
 
     private PriceResponse mapResultToPriceResponse(ResultSet resultSet) throws SQLException {
@@ -73,8 +80,8 @@ public class PriceServiceImpl  {
         BigDecimal price = resultSet.getBigDecimal("price");
         Boolean priority = resultSet.getBoolean("priority");
         String currency = resultSet.getString("currency");
-        Date starDate = resultSet.getDate("start_date");
+        Timestamp startDate = resultSet.getTimestamp("start_date");
         return priceResponseMapper.mapResultSetToPriceResponse(brandIdResponse,productIdResponse,
-                priceList,price,priority,currency,starDate);
+                priceList,price,priority,currency,startDate);
     }
 }
