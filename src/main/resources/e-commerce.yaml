@@ -55,6 +55,7 @@ components:
         properties:
           rateStartDate:
             type: string
+            format: date-time
             example: 2099-12-12T00:00.000Z
           brandId:
             type: integer
@@ -72,6 +73,9 @@ components:
             type: number
             minimum: 0
             example: 3.5
+          priority:
+            type: boolean
+            example: true
           currency:
             type: string
             example: EUR
