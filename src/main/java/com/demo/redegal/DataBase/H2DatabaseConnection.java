@@ -1,15 +1,17 @@
 package com.demo.redegal.DataBase;
 
-import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import java.sql.*;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
-@Component
 public class H2DatabaseConnection{
 
-    private Connection connection;
+    private final Connection connection;
 
     public H2DatabaseConnection( ) throws SQLException, ClassNotFoundException {
         Class.forName("org.h2.Driver");

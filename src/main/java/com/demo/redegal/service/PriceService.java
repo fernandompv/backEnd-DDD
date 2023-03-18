@@ -19,9 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class PriceServiceImpl  {
+public class PriceService {
 
-    @Autowired
     private H2DatabaseConnection database;
 
     @Autowired
@@ -30,6 +29,8 @@ public class PriceServiceImpl  {
     @SneakyThrows
     public PriceResponse getPrice(Integer productId, Integer brandId, String rateStartDate){
         String query = "SELECT * FROM PRICES WHERE product_id=? AND brand_id=? AND ? BETWEEN start_date AND end_date";
+
+        database = new H2DatabaseConnection();
 
         PreparedStatement statement = createStatementByQuery(query,productId,brandId,rateStartDate);
 
