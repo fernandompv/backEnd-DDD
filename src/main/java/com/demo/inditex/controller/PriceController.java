@@ -1,6 +1,6 @@
-package com.demo.redegal.controller;
+package com.demo.inditex.controller;
 
-import com.demo.redegal.service.PriceService;
+import com.demo.inditex.service.PriceService;
 import org.openapitools.api.PriceApi;
 import org.openapitools.model.PriceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ public class PriceController implements PriceApi {
 
     @Autowired
     private PriceService priceService;
+
     @Override
     public ResponseEntity<PriceResponse> getPrice(Integer productId, Integer brandId, String rateStartDate) {
         return ResponseEntity.ok(priceService.getPrice(productId,brandId,rateStartDate));

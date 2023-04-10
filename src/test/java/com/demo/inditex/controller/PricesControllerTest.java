@@ -1,4 +1,4 @@
-package com.demo.redegal.controller;
+package com.demo.inditex.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,14 +14,12 @@ import org.springframework.web.util.NestedServletException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.format.DateTimeParseException;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PriceControllerTest {
+public class PricesControllerTest {
 
     @Autowired
     private MockMvc mvc;

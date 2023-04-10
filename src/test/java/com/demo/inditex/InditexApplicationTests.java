@@ -1,10 +1,10 @@
-package com.demo.redegal;
+package com.demo.inditex;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RedegalApplicationTests {
+class InditexApplicationTests {
 
 	@Test
 	void contextLoads() {

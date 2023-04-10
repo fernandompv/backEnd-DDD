@@ -8,10 +8,10 @@
 		<version>2.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.demo.redegal</groupId>
-	<artifactId>redegal</artifactId>
+	<groupId>com.demo.inditex</groupId>
+	<artifactId>inditex</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>redegal</name>
+	<name>demo-inditex</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -48,7 +48,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -113,6 +112,7 @@
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.16.20</version>
 						</exclude>
 					</excludes>
 				</configuration>
