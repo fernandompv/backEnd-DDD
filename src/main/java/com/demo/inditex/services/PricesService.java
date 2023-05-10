@@ -1,24 +1,26 @@
-package com.demo.inditex.service;
+package com.demo.inditex.services;
 
+import com.demo.inditex.dtos.PriceResponse;
 import com.demo.inditex.entities.Prices;
 import com.demo.inditex.mapper.PriceResponseMapper;
 import com.demo.inditex.repositories.PricesRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.openapitools.model.PriceResponse;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class PriceService {
+public class PricesService {
 
     private final PricesRepository pricesRepository;
     private final PriceResponseMapper priceResponseMapper;
@@ -41,7 +43,7 @@ public class PriceService {
     private PriceResponse returnPriceWithPriority(List<PriceResponse> priceResponses) {
         PriceResponse priceResponse =  priceResponses
                 .stream()
-                .filter(PriceResponse::getPriority)
+                .filter(PriceResponse::priority)
                 .findFirst()
                 .orElse(null);
 
