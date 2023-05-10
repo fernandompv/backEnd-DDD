@@ -1,8 +1,8 @@
-package com.demo.inditex.mapper;
+package com.demo.inditex.price.application.mapper;
 
 
-import com.demo.inditex.dtos.PriceResponseDTO;
-import com.demo.inditex.entities.Prices;
+import com.demo.inditex.price.infraestructure.dtos.PriceResponseDTO;
+import com.demo.inditex.price.domain.entities.Prices;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;

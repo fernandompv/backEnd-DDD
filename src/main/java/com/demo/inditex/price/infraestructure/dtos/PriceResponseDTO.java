@@ -1,4 +1,4 @@
-package com.demo.inditex.dtos;
+package com.demo.inditex.price.infraestructure.dtos;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

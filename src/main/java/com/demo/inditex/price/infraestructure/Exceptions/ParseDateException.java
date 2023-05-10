@@ -1,4 +1,4 @@
-package com.demo.inditex.Exceptions;
+package com.demo.inditex.price.infraestructure.Exceptions;
 
 import lombok.Getter;
 

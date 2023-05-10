@@ -1,15 +1,14 @@
-package com.demo.inditex.services;
+package com.demo.inditex.price.application.services;
 
-import com.demo.inditex.Exceptions.ParseDateException;
-import com.demo.inditex.dtos.PriceResponseDTO;
-import com.demo.inditex.entities.Prices;
-import com.demo.inditex.mapper.PriceResponseMapper;
-import com.demo.inditex.repositories.PricesRepository;
+import com.demo.inditex.price.domain.port.PriceRepository;
+import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infraestructure.dtos.PriceResponseDTO;
+import com.demo.inditex.price.domain.entities.Prices;
+import com.demo.inditex.price.application.mapper.PriceResponseMapper;
 import com.demo.inditex.util.ErrorDictionary;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class PricesService {
 
-    private final PricesRepository pricesRepository;
+    private final PriceRepository pricesRepository;
     private final PriceResponseMapper priceResponseMapper;
 
 
@@ -31,8 +30,7 @@ public class PricesService {
         OffsetDateTime rateDate = parseRequestStringToDate(rateStartDate);
 
         List<Prices> prices = pricesRepository
-                .findPricesByProductIdAndBrandIdAndDates(productId,brandId,rateDate)
-                .orElseThrow(IllegalArgumentException::new);
+                .findPricesByProductIdAndBrandIdAndDates(productId,brandId,rateDate);
 
         List<PriceResponseDTO> priceResponsDTOS = prices
                 .stream()

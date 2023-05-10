@@ -1,7 +1,7 @@
-package com.demo.inditex.controllers;
+package com.demo.inditex.price.infraestructure.adapters.in;
 
-import com.demo.inditex.Exceptions.ParseDateException;
-import com.demo.inditex.dtos.ErrorDTO;
+import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infraestructure.dtos.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
