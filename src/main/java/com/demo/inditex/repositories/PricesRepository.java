@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PricesRepository extends JpaRepository<Prices,Long> {
 
     @Query("select a from Prices a where a.productId = :productId AND a.brandId = :brandId AND a.startDate < :rateStartDate AND a.endDate > :rateStartDate")
-    List<Prices> findPricesByProductIdAndBrandIdAndDates(@Param("productId") Integer productId, @Param("brandId") Integer brandId, @Param("rateStartDate") OffsetDateTime rateStartDate);
+    Optional<List<Prices>> findPricesByProductIdAndBrandIdAndDates(@Param("productId") Integer productId, @Param("brandId") Integer brandId, @Param("rateStartDate") OffsetDateTime rateStartDate);
 }

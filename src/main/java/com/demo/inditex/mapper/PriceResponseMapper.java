@@ -1,7 +1,7 @@
 package com.demo.inditex.mapper;
 
 
-import com.demo.inditex.dtos.PriceResponse;
+import com.demo.inditex.dtos.PriceResponseDTO;
 import com.demo.inditex.entities.Prices;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,5 +15,5 @@ public interface PriceResponseMapper {
 
     @Mapping(source = "prices.priceList", target = "rateId")
     @Mapping(source = "rateStartDate",target = "rateStartDate")
-    PriceResponse mapPriceToPriceResponse(Prices prices, OffsetDateTime rateStartDate);
+    PriceResponseDTO mapPriceToPriceResponse(Prices prices, OffsetDateTime rateStartDate);
 }
