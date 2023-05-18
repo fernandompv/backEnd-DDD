@@ -4,7 +4,7 @@ import org.junit.Ignore;
 import org.junit.jupiter.api.Tag;
 
 @Tag("UnitTes")
-public class PriceServiceImplTest {
+public class PriceServiceTest {
 
 
     @Ignore
