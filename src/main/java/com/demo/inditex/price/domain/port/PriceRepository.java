@@ -8,5 +8,5 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface PriceRepository {
-    List<Price> findPricesByProductIdAndBrandIdAndDates(Long productId, Long brandId, OffsetDateTime rateStartDate);
+    List<Price> findPricesByProductIdAndBrandIdAndDates(Long productId, Long brandId, OffsetDateTime priceStartDate);
 }

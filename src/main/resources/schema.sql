@@ -10,6 +10,6 @@ end_date TIMESTAMP  NOT NULL,
 price_list INT NOT NULL,
 product_id INT NOT NULL,
 priority Bigint NOT NULL,
-price NUMERIC NOT NULL,
+price FLOAT(24) NOT NULL,
 currency VARCHAR(250) NOT NULL,
 foreign key (brand_id) references brand(id));

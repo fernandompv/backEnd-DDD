@@ -1,0 +1,19 @@
+package com.demo.inditex.util;
+
+import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateUtils {
+
+    public static OffsetDateTime parseRequestStringToDate(String date) throws ParseDateException {
+        try {
+            DateTimeFormatter isoFormat = DateTimeFormatter.ISO_DATE_TIME;
+            return OffsetDateTime.parse(date,isoFormat);
+        }catch (Exception e){
+            throw new ParseDateException(String.format(ErrorDictionary.PARSE_DATE_ERROR_MESSAGE, date));
+        }
+
+    }
+}

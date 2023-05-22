@@ -4,5 +4,5 @@ import org.springframework.http.HttpStatus;
 
 import java.time.OffsetDateTime;
 
-public record ErrorDTO(HttpStatus status, String message, OffsetDateTime date) {
+public record ErrorResponseDTO(HttpStatus status, String message, OffsetDateTime date) {
 }

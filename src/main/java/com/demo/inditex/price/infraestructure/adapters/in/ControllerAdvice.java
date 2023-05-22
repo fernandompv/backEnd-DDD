@@ -1,7 +1,8 @@
 package com.demo.inditex.price.infraestructure.adapters.in;
 
 import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
-import com.demo.inditex.price.infraestructure.dtos.ErrorDTO;
+import com.demo.inditex.price.infraestructure.dtos.ErrorResponseDTO;
+import com.demo.inditex.util.ErrorDictionary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,16 +17,18 @@ public class ControllerAdvice {
 
     private Logger log = LoggerFactory.getLogger(ControllerAdvice.class);
 
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    public ResponseEntity<ErrorDTO> illegalArgumentExceptionHandler(RuntimeException ex){
-        ErrorDTO error = new ErrorDTO(HttpStatus.BAD_REQUEST,ex.getMessage(), OffsetDateTime.now());
-        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDTO> handleException(Exception ex) {
+        log.error("Unexpected error, if it`s a known error it´s necessary to create a specific exception -> {}",ex.toString());
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,
+                ErrorDictionary.UNKNOW_ERROR_MESSAGE,OffsetDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = ParseDateException.class)
-    public ResponseEntity<ErrorDTO> parseDateExceptionHandler(RuntimeException ex){
+    public ResponseEntity<ErrorResponseDTO> parseDateExceptionHandler(ParseDateException ex){
         log.info("Error parsing dates -> {}", ex.toString());
-        ErrorDTO error = new ErrorDTO(HttpStatus.BAD_REQUEST, ex.getMessage(), OffsetDateTime.now());
+        ErrorResponseDTO error = new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage(), OffsetDateTime.now());
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
 }
