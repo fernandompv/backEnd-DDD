@@ -74,9 +74,8 @@ components:
             minimum: 0
             example: 3.5
           priority:
-            type: number
-            minimum: 0
-            example: 2
+            type: integer
+            format: int32
           currency:
             type: string
             example: EUR
