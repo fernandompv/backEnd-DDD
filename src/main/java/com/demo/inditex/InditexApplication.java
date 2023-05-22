@@ -1,16 +1,12 @@
 package com.demo.inditex;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 
 
 @SpringBootApplication
+@EnableR2dbcRepositories
 public class InditexApplication {
 
 	public static void main(String[] args) {SpringApplication.run(InditexApplication.class, args);}

@@ -6,17 +6,28 @@ import com.demo.inditex.price.infraestructure.adapters.out.PriceCrudRepository;
 import com.demo.inditex.util.DateUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
 
 import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PriceRepositoryH2Test {
 
     @Autowired
@@ -29,100 +40,105 @@ public class PriceRepositoryH2Test {
         priceRepository = new PriceRepositoryH2(crudRepository);
     }
     @Test
+    @Order(1)
     public void test_FindByParams_10AM() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T10:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T10:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455L,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),1);
-        Assertions.assertEquals(prices.get(0).getPrice(), new BigDecimal("35.5"));
+        StepVerifier.create(prices)
+                .expectSubscription()
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("35.5")) == 0)
+                .expectComplete()
+                .verify();
     }
 
     @Test
+    @Order(2)
     public void test_FindByParams_16PM() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T16:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T16:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455L,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),2);
-        Assertions.assertEquals(prices.get(0).getPrice(), new BigDecimal("35.5"));
-        Assertions.assertEquals(prices.get(1).getPrice(), new BigDecimal("25.45"));
+        StepVerifier.create(prices)
+                .expectSubscription()
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("35.5")) == 0)
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("25.45")) == 0)
+                .expectComplete()
+                .verify();
     }
 
     @Test
+    @Order(3)
     public void test_FindByParams_21PM() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T21:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2020-06-14T21:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455L,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),1);
-        Assertions.assertEquals(prices.get(0).getPrice(), new BigDecimal("35.5"));
+        StepVerifier.create(prices)
+                .expectSubscription()
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("35.5")) == 0)
+                .expectComplete()
+                .verify();
     }
 
     @Test
+    @Order(4)
     public void test_FindByParams_nextDay_10PM() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2020-06-15T10:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2020-06-15T10:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455L,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),2);
-        Assertions.assertEquals(prices.get(0).getPrice(), new BigDecimal("35.5"));
-        Assertions.assertEquals(prices.get(1).getPrice(), new BigDecimal("30.5"));
+        StepVerifier.create(prices)
+                .expectSubscription()
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("35.5")) == 0)
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("30.5")) == 0)
+                .expectComplete()
+                .verify();
     }
 
     @Test
+    @Order(5)
     public void test_FindByParams_OtherDaY_21PM() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2020-06-16T21:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2020-06-16T21:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455L,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),2);
-        Assertions.assertEquals(prices.get(0).getPrice(), new BigDecimal("35.5"));
-        Assertions.assertEquals(prices.get(1).getPrice(), new BigDecimal("38.95"));
+        StepVerifier.create(prices)
+                .expectSubscription()
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("35.5")) == 0)
+                .expectNextMatches(price -> price.getPrice().compareTo(new BigDecimal("38.95")) == 0)
+                .expectComplete()
+                .verify();
     }
 
     @Test
+    @Order(6)
     public void test_FindByParams_empty() throws ParseDateException {
         //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2023-06-16T21:00:00Z");
+        LocalDateTime date = DateUtils.parseRequestStringToDate("2023-06-16T21:00:00Z");
 
         //WHEN
-        List<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(null,1L,date);
+        Flux<Price> prices = priceRepository.findPricesByProductIdAndBrandIdAndDates(35455,1,date);
 
         //THEN
-        Assertions.assertNotNull(prices);
-        Assertions.assertEquals(prices.size(),0);
-    }
-
-    @Test
-    public void test_FindByParams_Error() throws ParseDateException {
-        //GIVEN
-        OffsetDateTime date = DateUtils.parseRequestStringToDate("2023-06-16T21:00:00Z");
-        RuntimeException exception = assertThrows(IllegalArgumentException.class, () -> {
-            priceRepository.findPricesByProductIdAndBrandIdAndDates(null,2L,date);
-        });
-
-        //THEN
-        Assertions.assertNotNull(exception.getMessage());
+        StepVerifier.create(prices)
+                .expectComplete()
+                .verify();
     }
 }

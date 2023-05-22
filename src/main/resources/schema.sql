@@ -5,8 +5,8 @@ name VARCHAR(250) NOT NULL);
 CREATE TABLE price
 (id INT AUTO_INCREMENT PRIMARY KEY,
 brand_id INT,
-start_date TIMESTAMP  NOT NULL,
-end_date TIMESTAMP  NOT NULL,
+start_date DATETIME  NOT NULL,
+end_date DATETIME NOT NULL,
 price_list INT NOT NULL,
 product_id INT NOT NULL,
 priority Bigint NOT NULL,

@@ -1,7 +1,7 @@
-package com.demo.inditex.price.infraestructure.adapters.in;
+package com.demo.inditex.price.infraestructure.adapters.in.advice;
 
+import com.demo.inditex.Codegen.dto.ErrorResponseDTO;
 import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
-import com.demo.inditex.price.infraestructure.dtos.ErrorResponseDTO;
 import com.demo.inditex.util.ErrorDictionary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class ControllerAdvice {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleException(Exception ex) {
         log.error("Unexpected error, if it`s a known error it´s necessary to create a specific exception -> {}",ex.toString());
-        ErrorResponseDTO errorResponse = new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 ErrorDictionary.UNKNOW_ERROR_MESSAGE,OffsetDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -28,7 +28,7 @@ public class ControllerAdvice {
     @ExceptionHandler(value = ParseDateException.class)
     public ResponseEntity<ErrorResponseDTO> parseDateExceptionHandler(ParseDateException ex){
         log.info("Error parsing dates -> {}", ex.toString());
-        ErrorResponseDTO error = new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage(), OffsetDateTime.now());
+        ErrorResponseDTO error = new ErrorResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), OffsetDateTime.now());
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
     }
 }

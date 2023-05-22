@@ -1,16 +1,15 @@
 package com.demo.inditex.price.infraestructure.adapters.out;
 
 import com.demo.inditex.price.domain.entities.Price;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
 
-public interface PriceCrudRepository extends JpaRepository<Price,Long> {
-
-    @Query("select a from Price a where a.productId = :productId AND a.brand.Id = :brandId AND a.startDate <= :priceStartDate AND a.endDate >= :priceStartDate")
-    Optional<List<Price>> findPricesByProductIdAndBrandIdAndDates(@Param("productId") Long productId, @Param("brandId") Long brandId, @Param("priceStartDate") OffsetDateTime priceStartDate);
+@Repository
+public interface PriceCrudRepository extends ReactiveCrudRepository<Price,Long> {
+    @Query("select * from price where product_id = :productId AND brand_id = :brandId AND start_date <= :priceStartDate AND end_date >= :priceStartDate")
+    Flux<Price> findPricesByProductIdAndBrandIdAndDates(Integer productId,Integer brandId, LocalDateTime priceStartDate);
 }

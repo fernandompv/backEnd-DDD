@@ -1,7 +1,7 @@
 package com.demo.inditex.price.application.mapper;
 
 
-import com.demo.inditex.price.infraestructure.dtos.PriceResponseDTO;
+import com.demo.inditex.Codegen.dto.PriceResponseDTO;
 import com.demo.inditex.price.domain.entities.Price;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

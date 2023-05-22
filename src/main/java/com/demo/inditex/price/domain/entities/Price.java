@@ -1,43 +1,39 @@
 package com.demo.inditex.price.domain.entities;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Data
-@Entity
-@Table(name = "price")
-public class Price {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table("price")
+public class Price implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true,nullable = false)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "brand_id", nullable = false)
-    private Brand brand;
+    private Long brandId;
 
-    @Column(name = "start_date")
-    private OffsetDateTime startDate;
+    private LocalDateTime startDate;
 
-    @Column(name = "end_date")
-    private OffsetDateTime endDate;
+    private LocalDateTime endDate;
 
-    @Column(name = "price_list")
     private Long priceList;
 
-    @Column(name = "product_id")
     private Long productId;
 
-    @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "priority")
     private Long priority;
 
-    @Column(name = "currency")
     private String currency;
 
 }

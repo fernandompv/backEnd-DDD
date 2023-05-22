@@ -2,14 +2,14 @@ package com.demo.inditex.price.infraestructure.adapters.out.h2db;
 
 import com.demo.inditex.price.domain.entities.Price;
 import com.demo.inditex.price.domain.port.PriceRepository;
-import com.demo.inditex.price.infraestructure.Exceptions.ResourceNotFoundException;
 import com.demo.inditex.price.infraestructure.adapters.out.PriceCrudRepository;
-import com.demo.inditex.util.ErrorDictionary;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @Repository
 @AllArgsConstructor
@@ -17,8 +17,8 @@ public class PriceRepositoryH2 implements PriceRepository {
 
     private final PriceCrudRepository crudRepository;
     @Override
-    public List<Price> findPricesByProductIdAndBrandIdAndDates(Long productId, Long brandId, OffsetDateTime priceStartDate) {
+    public Flux<Price> findPricesByProductIdAndBrandIdAndDates(Integer productId, Integer brandId, LocalDateTime priceStartDate) {
         return crudRepository.findPricesByProductIdAndBrandIdAndDates(productId,brandId,priceStartDate)
-                .orElseThrow(IllegalArgumentException::new);
+                .onErrorMap(IllegalArgumentException::new);
     }
 }
