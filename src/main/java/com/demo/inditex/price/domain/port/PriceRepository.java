@@ -11,7 +11,5 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface PriceRepository {
-
-    @Cacheable("prices")
     Flux<Price> findPricesByProductIdAndBrandIdAndDates(Integer productId, Integer brandId, LocalDateTime priceStartDate);
 }
