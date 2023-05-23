@@ -7,7 +7,7 @@ info:
   version: 1.0.11
 tags:
   - name: price
-    description: Everything about pthe rice of products
+    description: Everything about the rice of products
 paths:
   /price:
     get:

@@ -164,8 +164,6 @@
                                 <reactive>true</reactive>
                                 <delegatePattern>true</delegatePattern>
                                 <interfaceOnly>true</interfaceOnly>
-                                <dateLibrary>java8</dateLibrary>
-                                <java8>true</java8>
                                 <sourceFolder>src/main/java</sourceFolder>
                                 <!--suppress UnresolvedMavenProperty -->
                                 <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
