@@ -7,8 +7,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
-import java.time.OffsetDateTime;
-
 @Component
 @Mapper(componentModel = "spring", implementationName = "PriceResponseMapperImpl")
 public interface PriceResponseMapper {

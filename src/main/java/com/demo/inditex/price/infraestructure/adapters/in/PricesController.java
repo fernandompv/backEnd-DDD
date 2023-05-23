@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 @RestController
 @AllArgsConstructor
 public class PricesController implements PriceApi {
