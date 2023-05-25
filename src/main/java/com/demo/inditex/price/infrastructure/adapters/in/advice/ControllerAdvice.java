@@ -1,7 +1,7 @@
-package com.demo.inditex.price.infraestructure.adapters.in.advice;
+package com.demo.inditex.price.infrastructure.adapters.in.advice;
 
 import com.demo.inditex.Codegen.dto.ErrorResponseDTO;
-import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infrastructure.Exceptions.ParseDateException;
 import com.demo.inditex.util.ErrorDictionary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

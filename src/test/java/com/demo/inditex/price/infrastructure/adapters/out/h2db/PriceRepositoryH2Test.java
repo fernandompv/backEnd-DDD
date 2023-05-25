@@ -1,8 +1,8 @@
-package com.demo.inditex.price.infraestructure.adapters.out.h2db;
+package com.demo.inditex.price.infrastructure.adapters.out.h2db;
 
 import com.demo.inditex.price.domain.entities.Price;
-import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
-import com.demo.inditex.price.infraestructure.adapters.out.PriceCrudRepository;
+import com.demo.inditex.price.infrastructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infrastructure.adapters.out.PriceCrudRepository;
 import com.demo.inditex.util.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;

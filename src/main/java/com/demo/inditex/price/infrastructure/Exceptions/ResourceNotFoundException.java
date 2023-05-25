@@ -1,4 +1,4 @@
-package com.demo.inditex.price.infraestructure.Exceptions;
+package com.demo.inditex.price.infrastructure.Exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
 

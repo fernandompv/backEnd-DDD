@@ -1,6 +1,6 @@
 package com.demo.inditex.util;
 
-import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infrastructure.Exceptions.ParseDateException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

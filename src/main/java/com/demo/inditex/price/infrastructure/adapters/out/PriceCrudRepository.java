@@ -1,4 +1,4 @@
-package com.demo.inditex.price.infraestructure.adapters.out;
+package com.demo.inditex.price.infrastructure.adapters.out;
 
 import com.demo.inditex.price.domain.entities.Price;
 import org.springframework.data.r2dbc.repository.Query;

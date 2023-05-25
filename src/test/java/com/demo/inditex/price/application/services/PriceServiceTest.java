@@ -4,7 +4,7 @@ import com.demo.inditex.Codegen.dto.PriceResponseDTO;
 import com.demo.inditex.price.application.mapper.PriceResponseMapper;
 import com.demo.inditex.price.domain.entities.Price;
 import com.demo.inditex.price.domain.port.PriceRepository;
-import com.demo.inditex.price.infraestructure.Exceptions.ParseDateException;
+import com.demo.inditex.price.infrastructure.Exceptions.ParseDateException;
 import com.demo.inditex.util.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;

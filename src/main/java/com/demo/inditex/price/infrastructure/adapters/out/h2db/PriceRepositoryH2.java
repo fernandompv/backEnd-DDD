@@ -1,8 +1,8 @@
-package com.demo.inditex.price.infraestructure.adapters.out.h2db;
+package com.demo.inditex.price.infrastructure.adapters.out.h2db;
 
 import com.demo.inditex.price.domain.entities.Price;
 import com.demo.inditex.price.domain.port.PriceRepository;
-import com.demo.inditex.price.infraestructure.adapters.out.PriceCrudRepository;
+import com.demo.inditex.price.infrastructure.adapters.out.PriceCrudRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
