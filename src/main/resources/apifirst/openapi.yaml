@@ -56,7 +56,7 @@ components:
           priceStartDate:
             type: string
             format: date-time
-            example: 2099-12-12T00:00.000Z
+            example: 2099-12-12T00:00
           brandId:
             type: integer
             format: int64

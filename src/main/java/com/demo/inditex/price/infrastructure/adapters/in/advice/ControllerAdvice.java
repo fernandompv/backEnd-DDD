@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ServerWebInputException;
 
 import java.time.OffsetDateTime;
 
@@ -23,6 +25,13 @@ public class ControllerAdvice {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 ErrorDictionary.UNKNOW_ERROR_MESSAGE,OffsetDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ServerWebInputException.class)
+    public ResponseEntity<ErrorResponseDTO> handleClientException(ServerWebInputException ex) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(HttpStatus.BAD_REQUEST.value() ,
+                ErrorDictionary.RESOURCE_NOT_FOUND_MESSAGE,OffsetDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ParseDateException.class)
