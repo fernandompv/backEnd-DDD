@@ -2,9 +2,14 @@
 
 This project it´s a demo project that get values from H2 database using web flux and performing test
 
-# For your information
+# Entities
 
-Url from [swagger] documentation
+## Price
+
+| id | brandId | startDate | endDate | priceList | productId | price | priority | currency |
+| -- | ------| ----- | ------| ----- | ------| ----- | ------| ----- |
+
+# [Swagger documentation]
 
 Example curl to get prices:
 ```bash
@@ -291,4 +296,4 @@ curl -X 'GET' \
 }
 ```
 
-[swagger]: <http://localhost:9999/swagger-doc/webjars/swagger-ui/index.html>
+[Swagger documentation]: <http://localhost:9999/swagger-doc/webjars/swagger-ui/index.html>
