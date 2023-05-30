@@ -4,13 +4,16 @@ This project it´s a demo project that get values from H2 database using web flu
 
 # For your information
 
-Url from swagger documentation: http://localhost:9999/swagger-doc/webjars/swagger-ui/index.html
+Url from [swagger] documentation
 
-Example curl to get prices: curl -X 'GET' \
+Example curl to get prices:
+```bash
+curl -X 'GET' \
 'http://localhost:9999/api/price?productId=35455&brandId=1&priceStartDate=2099-12-12T00%3A00' \
 -H 'accept: application/json'
+```
 
-# Postman collection for End To End test:
+# Postman collection for End-To-End test:
 ```json
 {
   "info": {
@@ -125,4 +128,167 @@ Example curl to get prices: curl -X 'GET' \
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "localhost:9999/api/
+          "raw": "localhost:9999/api/price?productId=35455&brandId=1&priceStartDate=2020-06-15T10:00",
+          "host": [
+            "localhost"
+          ],
+          "port": "9999",
+          "path": [
+            "api",
+            "price"
+          ],
+          "query": [
+            {
+              "key": "productId",
+              "value": "35455"
+            },
+            {
+              "key": "brandId",
+              "value": "1"
+            },
+            {
+              "key": "priceStartDate",
+              "value": "2020-06-15T10:00"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get price by date #5",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:9999/api/price?productId=35455&brandId=1&priceStartDate=2020-06-16T21:00",
+          "host": [
+            "localhost"
+          ],
+          "port": "9999",
+          "path": [
+            "api",
+            "price"
+          ],
+          "query": [
+            {
+              "key": "productId",
+              "value": "35455"
+            },
+            {
+              "key": "brandId",
+              "value": "1"
+            },
+            {
+              "key": "priceStartDate",
+              "value": "2020-06-16T21:00"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get price empty",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:9999/api/price?productId=35455&brandId=1&priceStartDate=2023-06-14T10:00",
+          "host": [
+            "localhost"
+          ],
+          "port": "9999",
+          "path": [
+            "api",
+            "price"
+          ],
+          "query": [
+            {
+              "key": "productId",
+              "value": "35455"
+            },
+            {
+              "key": "brandId",
+              "value": "1"
+            },
+            {
+              "key": "priceStartDate",
+              "value": "2023-06-14T10:00"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get price bad request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:9999/api/price?productId=camiseta&brandId=1&priceStartDate=2020-06-14T10:00",
+          "host": [
+            "localhost"
+          ],
+          "port": "9999",
+          "path": [
+            "api",
+            "price"
+          ],
+          "query": [
+            {
+              "key": "productId",
+              "value": "camiseta"
+            },
+            {
+              "key": "brandId",
+              "value": "1"
+            },
+            {
+              "key": "priceStartDate",
+              "value": "2020-06-14T10:00"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get price bad format date",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:9999/api/price?productId=35455&brandId=1&priceStartDate=2020-06-14T10:00.00Z",
+          "host": [
+            "localhost"
+          ],
+          "port": "9999",
+          "path": [
+            "api",
+            "price"
+          ],
+          "query": [
+            {
+              "key": "productId",
+              "value": "35455"
+            },
+            {
+              "key": "brandId",
+              "value": "1"
+            },
+            {
+              "key": "priceStartDate",
+              "value": "2020-06-14T10:00.00Z"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+```
+
+[swagger]: <http://localhost:9999/swagger-doc/webjars/swagger-ui/index.html>

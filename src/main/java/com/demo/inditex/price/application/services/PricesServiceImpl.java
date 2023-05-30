@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.time.LocalDateTime;
 import java.util.function.BiPredicate;
 
@@ -22,7 +21,6 @@ import static com.demo.inditex.util.DateUtils.parseRequestStringToDate;
 public non-sealed class PricesServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
     private final PriceResponseMapper priceResponseMapper;
-
 
     @Override
     public Mono<PriceResponseDTO> getPriceByPriority(Integer productId, Integer brandId, String priceStartDate) throws ResourceNotFoundException, ParseDateException {

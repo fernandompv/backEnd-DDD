@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Repository
@@ -14,9 +15,10 @@ import java.time.LocalDateTime;
 public class PriceRepositoryH2 implements PriceRepository {
 
     private final PriceCrudRepository crudRepository;
+
     @Override
     public Flux<Price> findPricesByProductIdAndBrandIdAndDates(Integer productId, Integer brandId, LocalDateTime priceStartDate) {
         return crudRepository.findPricesByProductIdAndBrandIdAndDates(productId,brandId,priceStartDate)
-                .onErrorMap(IllegalArgumentException::new);
+                .onErrorMap(SQLException::new);
     }
 }
