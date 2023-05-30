@@ -2,14 +2,14 @@
 
 This project it´s a demo project that get values from H2 database using web flux and performing test
 
-# Entities
+## Entities:
 
 ## Price
 
 | id | brandId | startDate | endDate | priceList | productId | price | priority | currency |
 | -- | ------| ----- | ------| ----- | ------| ----- | ------| ----- |
 
-# [Swagger documentation]
+## [Swagger documentation]
 
 Example curl to get prices:
 ```bash
